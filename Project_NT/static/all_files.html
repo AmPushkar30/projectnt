@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Files</title>
+    <link rel="stylesheet" href="all_files.css">
+</head>
+<body>
+    <nav>
+        <h1 class="title">All Uploaded Files</h1>
+    </nav>
+
+    <div class="button-align">
+        <a href="/static/index.html  " class="home-button">HOME</a>
+    </div>
+    
+    <ul id="file-list" class="file-list">
+        <!-- Files will be loaded here by JavaScript -->
+    </ul>
+
+    <script>
+        // Fetch and display all uploaded files
+        async function loadAllFiles() {
+            try {
+                const response = await fetch('/all-files-data');
+                const files = await response.json();
+
+                const fileList = document.getElementById('file-list');
+                fileList.innerHTML = '';  // Clear any existing content
+
+                if (files.length === 0) {
+                    fileList.innerHTML = '<li>No files available.</li>';
+                } else {
+                    files.forEach(file => {
+                        const link = document.createElement('a');
+                        link.href = `/download/${file}`;  // Link to download each file
+                        link.download = file;  // Forces download
+                        link.className = 'file-item';  // Add 'file-item' class directly to <a>
+                        link.style.display = 'flex';
+                        link.style.textDecoration = 'none';
+
+                        // Add an image icon for each file
+                        const img = document.createElement('img');
+                        img.src = '/static/sample.png';  // Update with your actual image path
+                        img.alt = 'File icon';
+                        img.className = 'file-icon';
+
+                        // Append the image and file name to the link
+                        link.appendChild(img);
+                        link.appendChild(document.createTextNode(file));
+                        fileList.appendChild(link);  // Append the link directly to the file list
+                    });
+                }
+            } catch (error) {
+                console.error("Error loading files:", error);
+            }
+        }
+
+        // Load files when the page loads
+        window.onload = loadAllFiles;
+    </script>
+</body>
+</html>

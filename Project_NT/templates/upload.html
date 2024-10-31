@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Files</title>
+    <link rel="stylesheet" href="upload.css">
+</head>
+<body>
+    <h1 class="title">Upload a File</h1>
+
+    <form action="/upload" method="post" enctype="multipart/form-data" onsubmit="if (confirmUpload()) { showSuccessMessage(); }">
+        <input type="file" name="file" required>
+        <button type="submit">Upload</button>
+    </form>
+
+    <h2 class="section-title">Available Files for Download</h2>
+    <ul class="file-list">
+        {% for file in files %}
+            <li class="file-item">
+                <a href="{{ url_for('download_file', filename=file) }}" class="file-link">{{ file }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <div class="button-align">
+        <a href="/static/index.html" class="home-button">HOME</a>
+    </div>
+
+    <script>
+        function confirmUpload() {
+            return confirm("Are you sure you want to upload this file?");
+        }
+
+        function showSuccessMessage() {
+            alert("Your file has been uploaded successfully!");
+        }
+    </script>
+</body>
+</html>

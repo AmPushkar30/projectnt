@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home page</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+    <h1 class="title">PROJECT NT</h1>
+
+    <nav>
+        <a href="/static/all_files.html">ALL FILES</a> |
+       
+            <a href="/upload">UPLOAD</a> |
+
+            <a href="/contact">CONTACT US</a>
+    </nav>
+    
+    <section>
+        <h2>Recent uploads</h2>
+        <ul id="recent-files" class="file-list">
+            <!-- Latest files will be loaded here by JavaScript -->
+        </ul>
+    </section>
+
+    <script>
+        async function loadLatestFiles() {
+            try {
+                const response = await fetch('/latest-files');
+                const files = await response.json();
+                
+                const fileList = document.getElementById('recent-files');
+                fileList.innerHTML = '';
+
+                if (files.length === 0) {
+                    fileList.innerHTML = '<li>No recent files available.</li>';
+                } else {
+                    files.forEach(file => {
+                        const link = document.createElement('a');
+                        link.href = `/download/${file}`;  // Set the download link
+                        link.download = file;  // Forces download
+                        link.className = 'file-item';  // Add 'file-item' class directly to <a>
+                        link.style.display = 'flex';
+                        link.style.textDecoration = 'none';
+
+                        const img = document.createElement('img');
+                        img.src = '/static/sample.png';  // Use your actual image path
+                        img.alt = 'File icon';
+                        img.className = 'file-icon';
+
+                        link.appendChild(img);
+                        link.appendChild(document.createTextNode(file));
+                        fileList.appendChild(link);  // Append the link to the file list
+                    });
+                }
+            } catch (error) {
+                console.error("Error loading files:", error);
+            }
+        }
+
+        window.onload = loadLatestFiles;
+    </script>
+</body>
+</html>

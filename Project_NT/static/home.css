@@ -1,0 +1,84 @@
+body {
+    font-family: Arial, sans-serif;
+    background: url(background.jpg) no-repeat center center fixed; /* Centers and prevents scrolling */
+    background-size: cover; /* Scales the image to cover the viewport */
+}
+
+.title {
+    color: aliceblue;
+    text-align: center;
+    margin-top: 20px;
+    padding: 20px; /* Add padding for spacing inside the border */
+    font-weight: bolder;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 65px;
+     /* White glow effect */
+     text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+     0 0 20px rgba(255, 255, 255, 0.6),
+     0 0 30px rgba(255, 255, 255, 0.4);
+}
+
+nav {
+    
+    display: flex;
+    justify-content: center;  /* Center horizontally */
+    align-items: center;      /* Center vertically */
+    background-color: #DEE5D4;
+    padding: 15px 0; 
+}
+
+nav a {
+    margin: 0 100px;
+    text-decoration: none;
+    color: #000000;
+    font-weight: bold;
+}
+
+section h2 {
+    text-align: center;
+    color: aliceblue;
+    
+}
+
+.file-list {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    border: 1px solid #9e4242;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 10px;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    background: #d2e0fb;
+}
+
+.file-item:hover {
+    transform: scale(1.05);
+}
+
+.file-icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 15px;
+}
+
+.file-link {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.file-link:hover {
+    color: #0056b3;
+}
