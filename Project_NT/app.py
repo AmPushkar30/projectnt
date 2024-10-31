@@ -1,4 +1,4 @@
-from flask import Flask, request, send_from_directory, jsonify, redirect, url_for,render_template
+from flask import Flask, request, send_from_directory, jsonify, redirect, url_for, render_template
 import os
 
 app = Flask(__name__)
@@ -46,9 +46,9 @@ def upload_file():
     return redirect(url_for('upload_page'))
 
 # Route to handle file downloads
-@app.route('/download/<filename>')
+@app.route('/download/<path:filename>')  # Use <path:filename> to handle potential slashes in filenames
 def download_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True)  # Set debug=False for production
